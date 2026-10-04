@@ -1,0 +1,8 @@
+// Custom rabbit fusion items (legacy .txt format)
+// Append to item_db.txt – adjust IDs if needed
+
+19600,Rabbit_Top_Hat,Rabbit Top Hat,5,0,,30,,2,,0,0,0,0,0,0,0,0,0,{},{},{}
+19601,Twin_Rabbit_Headgear,Twin Rabbit Headgear,5,0,,20,,1,,0,0,0,0,0,0,0,0,0,{},{},{}
+19602,Eclipse_Corsair,Eclipse Corsair,5,0,,40,,3,,0,0,0,0,0,0,0,0,0,{},{},{}
+19603,Ghost_Bunny_Band,Ghost Bunny Band,5,0,,15,,2,,0,0,0,0,0,0,0,0,0,{},{},{}
+19604,Rabbit_Lucky_Charm,Rabbit Lucky Charm,5,0,,10,,0,,0,0,0,0,0,0,0,0,0,{},{},{}

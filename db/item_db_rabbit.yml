@@ -1,0 +1,107 @@
+# Custom rabbit / Eclipse / pirate fusion items
+# Merge into your item_db. Change IDs if they conflict.
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 19600
+    AegisName: Rabbit_Top_Hat
+    Name: Rabbit Top Hat
+    Type: Armor
+    Buy: 0
+    Weight: 30
+    Defense: 2
+    Slots: 0
+    Jobs:
+      All: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 1100
+    Script: |
+      bonus bAgi,4;
+      // chance to cast Increase AGI when hit – implement via OnEquip if needed
+
+  - Id: 19601
+    AegisName: Twin_Rabbit_Headgear
+    Name: Twin Rabbit Headgear
+    Type: Armor
+    Buy: 0
+    Weight: 20
+    Defense: 1
+    Slots: 0
+    Jobs:
+      All: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 1101
+    Script: |
+      bonus bLuk,5;
+      bonus bFlee,5;
+
+  - Id: 19602
+    AegisName: Eclipse_Corsair
+    Name: Eclipse Corsair
+    Type: Armor
+    Buy: 0
+    Weight: 40
+    Defense: 3
+    Spots: 0
+    Jobs:
+      All: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 40
+    Refineable: true
+    View: 1102
+    Script: |
+      bonus bAgi,3;
+      bonus bLuk,3;
+      bonus2 bSubRace,RC_Undead,5;
+      // mild ghost/undead flavour from Drake fusion
+
+  - Id: 19603
+    AegisName: Ghost_Bunny_Band
+    Name: Ghost Bunny Band
+    Type: Armor
+    Buy: 0
+    Weight: 15
+    Defense: 2
+    Slots: 0
+    Jobs:
+      All: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 1103
+    Script: |
+      bonus bLuk,3;
+      bonus bMaxSP,50;
+      // optional: bonus bDefEle,Ele_Ghost;
+
+  - Id: 19604
+    AegisName: Rabbit_Lucky_Charm
+    Name: Rabbit Lucky Charm
+    Type: Armor
+    Buy: 0
+    Weight: 10
+    Defense: 0
+    Slots: 0
+    Jobs:
+      All: true
+    Locations:
+      Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      bonus bLuk,4;

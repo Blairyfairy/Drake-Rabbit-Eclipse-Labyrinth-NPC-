@@ -1,0 +1,29 @@
+// Optional set bonus when wearing multiple rabbit fusion pieces
+// Include this file if you want extra rewards for collecting the set.
+
+-	script	RabbitSetBonus	-1,{
+	end;
+
+OnPCEquipEvent:
+	callfunc "F_CheckRabbitSet";
+	end;
+
+OnPCUnequipEvent:
+	callfunc "F_CheckRabbitSet";
+	end;
+}
+
+function	script	F_CheckRabbitSet	{
+	.@count = 0;
+	if (getequipid(EQI_HEAD_TOP) == 19600 || getequipid(EQI_HEAD_TOP) == 19601 || getequipid(EQI_HEAD_TOP) == 19602 || getequipid(EQI_HEAD_TOP) == 19603)
+		.@count++;
+	if (getequipid(EQI_ACC_L) == 19604 || getequipid(EQI_ACC_R) == 19604)
+		.@count++;
+
+	// Example: 2+ pieces = small extra LUK
+	if (.@count >= 2) {
+		bonus bLuk,2;
+		// You can expand with more bonuses or a status icon
+	}
+	return;
+}
