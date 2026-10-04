@@ -1,6 +1,7 @@
 //===== Rabbit Labyrinth Fusion NPC =================================
-//= Crafts rabbit / Eclipse / Drake-pirate / ghost fusion gear
+//= Complete version with ALL items and trade-offs fully implemented
 //= Location: Labyrinth Forest (prt_maze03) near Eclipse
+//= Themes: Rabbit + Eclipse + Drake (pirate/ghost)
 //===================================================================
 
 prt_maze03,170,170,4	script	Labyrinth Fusionist	4_F_RABBIT,{
@@ -22,187 +23,322 @@ prt_maze03,170,170,4	script	Labyrinth Fusionist	4_F_RABBIT,{
 		"Goodbye"
 	)) {
 
-	// -------------------------------------------------
+	// ================================================================
 	// 1. Rabbit Top Hat
-	// -------------------------------------------------
+	// ================================================================
 	case 1:
 		mes "[Labyrinth Fusionist]";
 		mes "A classic with extra hop!";
-		mes "I need:";
-		mes "- 1× Bunny Band";
-		mes "- 3× Four Leaf Clover";
-		mes "- 50× Feather";
+		mes "Requirements:";
+		mes "- 1x ^0000FFBunny Band^000000";
+		mes "- 3x ^0000FFFour Leaf Clover^000000";
+		mes "- 50x ^0000FFFeather^000000";
 		mes "- 500,000 zeny";
 		next;
 		if (select("Craft it!:Cancel") == 2) close;
 
-		if (countitem(2214) < 1) {			// Bunny Band
-			mes "Missing Bunny Band."; close;
+		if (countitem(2214) < 1) {
+			mes "[Labyrinth Fusionist]";
+			mes "You are missing a Bunny Band.";
+			close;
 		}
-		if (countitem(706) < 3) {			// Four Leaf Clover (common ID)
-			mes "I need 3 Four Leaf Clovers."; close;
+		if (countitem(706) < 3) {
+			mes "[Labyrinth Fusionist]";
+			mes "I need 3 Four Leaf Clovers.";
+			close;
 		}
-		if (countitem(949) < 50) {			// Feather
-			mes "Need 50 Feathers."; close;
+		if (countitem(949) < 50) {
+			mes "[Labyrinth Fusionist]";
+			mes "I need 50 Feathers.";
+			close;
 		}
 		if (Zeny < 500000) {
-			mes "Need 500,000 zeny."; close;
+			mes "[Labyrinth Fusionist]";
+			mes "You need 500,000 zeny.";
+			close;
 		}
 
-		delitem 2214,1;
-		delitem 706,3;
-		delitem 949,50;
+		delitem 2214,1;		// Bunny Band
+		delitem 706,3;		// Four Leaf Clover
+		delitem 949,50;		// Feather
 		Zeny -= 500000;
 		getitem 19600,1;	// Rabbit Top Hat
 
 		mes "[Labyrinth Fusionist]";
-		mes "Hop hop! Your Rabbit Top Hat is ready.";
+		mes "Hop hop! Your ^FF69B4Rabbit Top Hat^000000 is ready.";
 		mes "May your AGI never fail you.";
 		close;
 
-	// -------------------------------------------------
+	// ================================================================
 	// 2. Twin Rabbit Headgear
-	// -------------------------------------------------
+	// ================================================================
 	case 2:
 		mes "[Labyrinth Fusionist]";
 		mes "Double the ears, double the luck!";
-		mes "Option A: 2× Bunny Band + Eclipse Card";
-		mes "Option B: 2× Bunny Band + 5× Clover + 1× Rainbow Carrot + Cute Ribbon";
+		mes "Choose your path:";
 		next;
-		switch(select("Use Eclipse Card path:Use material path:Cancel")) {
-		case 1:
-			if (countitem(2214) < 2 || countitem(4197) < 1) {	// Eclipse Card ID often 4197 or check
-				mes "Need 2 Bunny Bands and 1 Eclipse Card."; close;
+		switch(select(
+			"Eclipse Card path (faster)",
+			"Material path (no card needed)",
+			"Cancel"
+		)) {
+		case 1:		// Eclipse Card path
+			mes "[Labyrinth Fusionist]";
+			mes "Requirements:";
+			mes "- 2x Bunny Band";
+			mes "- 1x Eclipse Card";
+			mes "- 1,500,000 zeny";
+			next;
+			if (select("Craft!:Cancel") == 2) close;
+
+			if (countitem(2214) < 2) {
+				mes "You need 2 Bunny Bands."; close;
 			}
-			if (Zeny < 1500000) { mes "Need 1,500,000 zeny."; close; }
+			if (countitem(4197) < 1) {		// Eclipse Card (confirm ID on your server)
+				mes "You need 1 Eclipse Card."; close;
+			}
+			if (Zeny < 1500000) {
+				mes "You need 1,500,000 zeny."; close;
+			}
+
 			delitem 2214,2;
 			delitem 4197,1;
 			Zeny -= 1500000;
-			getitem 19601,1;
-			break;
-		case 2:
-			if (countitem(2214) < 2 || countitem(706) < 5 || countitem(10007) < 1 || countitem(10008) < 1) {
-				// Rainbow Carrot & Cute Ribbon IDs vary – confirm on your server
-				mes "Missing materials for the long path."; close;
+			getitem 19601,1;	// Twin Rabbit Headgear
+
+			mes "[Labyrinth Fusionist]";
+			mes "Twin rabbits! You look twice as lucky.";
+			close;
+
+		case 2:		// Material path
+			mes "[Labyrinth Fusionist]";
+			mes "Requirements:";
+			mes "- 2x Bunny Band";
+			mes "- 5x Four Leaf Clover";
+			mes "- 1x Rainbow Carrot";
+			mes "- 1x Cute Ribbon";
+			mes "- 1,500,000 zeny";
+			next;
+			if (select("Craft!:Cancel") == 2) close;
+
+			if (countitem(2214) < 2) {
+				mes "You need 2 Bunny Bands."; close;
 			}
-			if (Zeny < 1500000) { mes "Need 1,500,000 zeny."; close; }
+			if (countitem(706) < 5) {
+				mes "You need 5 Four Leaf Clovers."; close;
+			}
+			if (countitem(622) < 1) {
+				mes "You need 1 Rainbow Carrot."; close;
+			}
+			if (countitem(2250) < 1) {
+				mes "You need 1 Cute Ribbon."; close;
+			}
+			if (Zeny < 1500000) {
+				mes "You need 1,500,000 zeny."; close;
+			}
+
 			delitem 2214,2;
 			delitem 706,5;
-			// delitem RainbowCarrot,1;
-			// delitem CuteRibbon,1;
+			delitem 622,1;		// Rainbow Carrot
+			delitem 2250,1;		// Cute Ribbon
 			Zeny -= 1500000;
 			getitem 19601,1;
-			break;
+
+			mes "[Labyrinth Fusionist]";
+			mes "Twin rabbits crafted the long way! Very dedicated.";
+			close;
+
 		case 3:
 			close;
 		}
-		mes "[Labyrinth Fusionist]";
-		mes "Twin rabbits! You look twice as lucky.";
-		close;
+		break;
 
-	// -------------------------------------------------
-	// 3. Eclipse Corsair (signature fusion)
-	// -------------------------------------------------
+	// ================================================================
+	// 3. Eclipse Corsair (signature Pirate + Rabbit fusion)
+	// ================================================================
 	case 3:
 		mes "[Labyrinth Fusionist]";
-		mes "The masterpiece: pirate hat + rabbit soul.";
-		mes "I need:";
-		mes "- 1× Corsair (from Drake)";
-		mes "- 1× Eclipse Card  ^777777OR^000000  3× Rainbow Carrot + 5× Four Leaf Clover";
-		mes "- 1× any Drake weapon or 1× Amethyst";
-		mes "- 3,000,000 zeny";
+		mes "The masterpiece: pirate hat fused with rabbit soul.";
+		mes "Choose your path:";
 		next;
-		if (select("I have everything:Cancel") == 2) close;
+		switch(select(
+			"Eclipse Card path",
+			"Full material path (no card)",
+			"Cancel"
+		)) {
+		case 1:		// Card path
+			mes "[Labyrinth Fusionist]";
+			mes "Requirements:";
+			mes "- 1x ^0000FFCorsair^000000 (Drake drop)";
+			mes "- 1x Eclipse Card";
+			mes "- 1x Amethyst";
+			mes "- 3,000,000 zeny";
+			next;
+			if (select("Craft!:Cancel") == 2) close;
 
-		if (countitem(5018) < 1) {		// Corsair (confirm ID)
-			mes "You need a Corsair hat from Drake."; close;
-		}
-		// Simplified check – expand for full OR logic
-		if (countitem(4197) < 1 && (countitem(706) < 5)) {
-			mes "Need Eclipse Card or the clover/carrot alternative."; close;
-		}
-		if (Zeny < 3000000) {
-			mes "Need 3,000,000 zeny."; close;
-		}
+			if (countitem(5018) < 1) {		// Corsair
+				mes "You need a Corsair from Drake."; close;
+			}
+			if (countitem(4197) < 1) {
+				mes "You need 1 Eclipse Card."; close;
+			}
+			if (countitem(719) < 1) {		// Amethyst
+				mes "You need 1 Amethyst."; close;
+			}
+			if (Zeny < 3000000) {
+				mes "You need 3,000,000 zeny."; close;
+			}
 
-		delitem 5018,1;		// Corsair
-		if (countitem(4197) > 0) delitem 4197,1;
-		else {
+			delitem 5018,1;
+			delitem 4197,1;
+			delitem 719,1;
+			Zeny -= 3000000;
+			getitem 19602,1;	// Eclipse Corsair
+
+			mes "[Labyrinth Fusionist]";
+			mes "Behold! The ^FFD700Eclipse Corsair^000000.";
+			mes "Rabbit luck now sails with the ghost pirate.";
+			close;
+
+		case 2:		// Material path
+			mes "[Labyrinth Fusionist]";
+			mes "Requirements:";
+			mes "- 1x Corsair";
+			mes "- 5x Four Leaf Clover";
+			mes "- 3x Rainbow Carrot";
+			mes "- 1x Cute Ribbon";
+			mes "- 1x Amethyst";
+			mes "- 3,000,000 zeny";
+			next;
+			if (select("Craft!:Cancel") == 2) close;
+
+			if (countitem(5018) < 1) {
+				mes "You need a Corsair."; close;
+			}
+			if (countitem(706) < 5) {
+				mes "You need 5 Four Leaf Clovers."; close;
+			}
+			if (countitem(622) < 3) {
+				mes "You need 3 Rainbow Carrots."; close;
+			}
+			if (countitem(2250) < 1) {
+				mes "You need 1 Cute Ribbon."; close;
+			}
+			if (countitem(719) < 1) {
+				mes "You need 1 Amethyst."; close;
+			}
+			if (Zeny < 3000000) {
+				mes "You need 3,000,000 zeny."; close;
+			}
+
+			delitem 5018,1;
 			delitem 706,5;
-			// delitem RainbowCarrot x3 if available
+			delitem 622,3;
+			delitem 2250,1;
+			delitem 719,1;
+			Zeny -= 3000000;
+			getitem 19602,1;
+
+			mes "[Labyrinth Fusionist]";
+			mes "The Eclipse Corsair is complete – pure material fusion!";
+			close;
+
+		case 3:
+			close;
 		}
-		Zeny -= 3000000;
-		getitem 19602,1;	// Eclipse Corsair
+		break;
 
-		mes "[Labyrinth Fusionist]";
-		mes "Behold! The Eclipse Corsair.";
-		mes "Rabbit luck sails with the ghost pirate.";
-		close;
-
-	// -------------------------------------------------
+	// ================================================================
 	// 4. Ghost Bunny Band
-	// -------------------------------------------------
+	// ================================================================
 	case 4:
 		mes "[Labyrinth Fusionist]";
-		mes "A Bunny Band touched by ghostly winds…";
-		mes "Need: 1× Bunny Band + 1× Fabric (or Ghost Bandana) + 1× Four Leaf Clover + 2M zeny";
+		mes "A Bunny Band touched by ghostly pirate winds…";
+		mes "Requirements:";
+		mes "- 1x Bunny Band";
+		mes "- 1x Four Leaf Clover";
+		mes "- 1x Fabric";
+		mes "- 2,000,000 zeny";
 		next;
-		if (select("Craft:Cancel") == 2) close;
+		if (select("Craft it!:Cancel") == 2) close;
 
-		if (countitem(2214) < 1 || countitem(706) < 1 || countitem(1059) < 1) {	// Fabric common ID
-			mes "Missing materials."; close;
+		if (countitem(2214) < 1) {
+			mes "You need a Bunny Band."; close;
 		}
-		if (Zeny < 2000000) { mes "Need 2,000,000 zeny."; close; }
+		if (countitem(706) < 1) {
+			mes "You need 1 Four Leaf Clover."; close;
+		}
+		if (countitem(1059) < 1) {		// Fabric
+			mes "You need 1 Fabric (ghostly material)."; close;
+		}
+		if (Zeny < 2000000) {
+			mes "You need 2,000,000 zeny."; close;
+		}
 
 		delitem 2214,1;
 		delitem 706,1;
 		delitem 1059,1;
 		Zeny -= 2000000;
-		getitem 19603,1;
+		getitem 19603,1;	// Ghost Bunny Band
 
 		mes "[Labyrinth Fusionist]";
-		mes "The Ghost Bunny Band is yours. Spooky and cute!";
+		mes "The ^A020F0Ghost Bunny Band^000000 is yours.";
+		mes "Spooky and cute at the same time!";
 		close;
 
-	// -------------------------------------------------
+	// ================================================================
 	// 5. Rabbit Lucky Charm
-	// -------------------------------------------------
+	// ================================================================
 	case 5:
 		mes "[Labyrinth Fusionist]";
 		mes "A portable bit of Labyrinth luck.";
-		mes "2× Four Leaf Clover + 1× Rainbow Carrot + 10× Feather + 300k zeny";
+		mes "Requirements:";
+		mes "- 2x Four Leaf Clover";
+		mes "- 1x Rainbow Carrot";
+		mes "- 10x Feather";
+		mes "- 300,000 zeny";
 		next;
-		if (select("Craft:Cancel") == 2) close;
+		if (select("Craft it!:Cancel") == 2) close;
 
-		if (countitem(706) < 2 || countitem(949) < 10) {
-			mes "Missing materials."; close;
+		if (countitem(706) < 2) {
+			mes "You need 2 Four Leaf Clovers."; close;
 		}
-		if (Zeny < 300000) { mes "Need 300,000 zeny."; close; }
+		if (countitem(622) < 1) {
+			mes "You need 1 Rainbow Carrot."; close;
+		}
+		if (countitem(949) < 10) {
+			mes "You need 10 Feathers."; close;
+		}
+		if (Zeny < 300000) {
+			mes "You need 300,000 zeny."; close;
+		}
 
 		delitem 706,2;
+		delitem 622,1;
 		delitem 949,10;
-		// delitem RainbowCarrot,1;
 		Zeny -= 300000;
-		getitem 19604,1;
+		getitem 19604,1;	// Rabbit Lucky Charm
 
 		mes "[Labyrinth Fusionist]";
-		mes "Keep this charm close. Luck follows the rabbit.";
+		mes "Keep this ^00FF00Rabbit Lucky Charm^000000 close.";
+		mes "Luck follows the rabbit.";
 		close;
 
-	// -------------------------------------------------
+	// ================================================================
 	// 6. Lore
-	// -------------------------------------------------
+	// ================================================================
 	case 6:
 		mes "[Labyrinth Fusionist]";
 		mes "Eclipse was once a normal Lunatic…";
-		mes "until it touched the wrong four-leaf clover.";
+		mes "until it touched the wrong four-leaf clover deep in this Labyrinth.";
 		next;
 		mes "[Labyrinth Fusionist]";
-		mes "Drake died chasing treasure and became a ghost pirate.";
-		mes "I simply decided they should meet inside the Labyrinth.";
+		mes "Drake died chasing treasure on the Sunken Ship and became a ghost pirate.";
+		mes "I simply decided their powers should meet.";
 		next;
 		mes "[Labyrinth Fusionist]";
-		mes "Now their powers can hop and sail together.";
+		mes "Now rabbit luck can hop… and sail under a ghostly flag.";
+		mes "Bring me the materials and I will fuse them for you.";
 		close;
 
 	case 7:
